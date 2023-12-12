@@ -1,0 +1,33 @@
+<!-- LOADING BAR -->
+<div *ngIf="this.loader.getLoading()" class="Loading-Data-progress-bar"></div>
+
+<!-- DNA loader for LoginPageComponent -->
+<div class="overlay-adn" *ngIf="this.loader.getDNALoading()">
+  <div class="wrapper">
+    <div id="dot1"></div>
+    <div id="dot2"></div>
+    <div id="dot3"></div>
+    <div id="dot4"></div>
+    <div id="dot5"></div>
+    <div id="dot6"></div>
+    <div id="dot7"></div>
+    <div id="dot8"></div>
+    <div id="dot9"></div>
+    <div id="dot10"></div>
+    <div id="base1"></div>
+    <div id="base2"></div>
+    <div id="base3"></div>
+    <div id="base4"></div>
+    <div id="base5"></div>
+  </div>
+</div>
+
+<!-- PILL LOADER -->
+
+<!-- <div class="pill" *ngIf="this.loader.getPILL_Loader()">
+    <span></span>
+</div> -->
+
+<main *ngIf="this.loader.getSpiner()">
+  <div class="cssload-speeding-wheel"></div>
+</main>
