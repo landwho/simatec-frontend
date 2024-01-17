@@ -6,19 +6,19 @@
     <div class="filter p-fluid">
 
         <div class="row">
-            <div class="col-md-3">
-                <label for="integeronly">Integer Only</label>
+            <div class="col-md-4">
+                <label for="integeronly">Bodega</label>
                 <p-multiSelect [options]="cities" [(ngModel)]="selectedCities" optionLabel="name"></p-multiSelect>
             </div>
             <div class="col-md-3">
-                <label for="integeronly">Integer Only</label>
+                <label for="integeronly">Lote</label>
                 <p-multiSelect [options]="cities" [(ngModel)]="selectedCities" optionLabel="name"></p-multiSelect>
             </div>
-            <div class="col-md-3">
-                <label for="integeronly">Integer Only</label>
+            <div class="col-md-4">
+                <label for="integeronly">Producto</label>
                 <p-multiSelect [options]="cities" [(ngModel)]="selectedCities" optionLabel="name"></p-multiSelect>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-1">
                 <div class="flex justify-content-center flex-wrap gap-3 mt-4">
                     <p-button icon="pi pi-search" [rounded]="true" severity="info" [outlined]="true"></p-button>
                   
@@ -30,18 +30,18 @@
         <br>
 
         <div class="row">
-            <div class="col-md-1">
+            <div class="col-md-2">
                 <p-radioButton name="pizza" value="Cheese" [(ngModel)]="ingredient" inputId="ingredient1"></p-radioButton>
-                <label for="ingredient1" class="ml-2">Cheese</label>
+                <label for="ingredient1" class="ml-2">Productos en existenci</label>
             </div>
 
             <div class="col-md-1">
                 <p-radioButton name="pizza" value="Mushroom" [(ngModel)]="ingredient" inputId="ingredient2"></p-radioButton>
-                <label for="ingredient2" class="ml-2">Mushroom</label>
+                <label for="ingredient2" class="ml-2">Description</label>
             </div>
             <div class="col-md-1">
                 <p-radioButton name="pizza" value="Pepper" [(ngModel)]="ingredient" inputId="ingredient3"></p-radioButton>
-                <label for="ingredient3" class="ml-2">Pepper</label>
+                <label for="ingredient3" class="ml-2">Description</label>
             </div>
         </div>
 

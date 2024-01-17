@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-
+import { Validators,FormControl,FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,27 +11,24 @@ export class LoginComponent {
   value1: string ='';
   value2: string ='';
 
-constructor(){}
+constructor(private Router:Router){}
 
-
-cities!: City[];
-
-selectedCity!: City;
+loginForm!: FormGroup;
+    
+submitted = false;
 
 ngOnInit() {
-    this.cities = [
-        { name: 'New York', code: 'NY' },
-        { name: 'Rome', code: 'RM' },
-        { name: 'London', code: 'LDN' },
-        { name: 'Istanbul', code: 'IST' },
-        { name: 'Paris', code: 'PRS' }
-    ];
+    this.loginForm = new FormGroup({
+        'login': new FormControl('', Validators.required),
+        'password': new FormControl('', Validators.required)
+    });
+}
+
+onSubmit() { 
+    this.submitted = true;
+    this.Router.navigate(['simatec/dashboard'])
+    // alert(JSON.stringify(this.loginForm.value));
 }
 
 }
 
-
-interface City {
-  name: string,
-  code: string
-}

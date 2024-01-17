@@ -1,31 +1,49 @@
 <div class="container">
     <div class="d-flex justify-content-center align-items-center h-100vh">
-        <div class="card flex justify-content-center">
-            <p-fieldset legend="Login">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card flex justify-content-center">
-                            <input type="text" pInputText [(ngModel)]="value1" />
+       
+        <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+            <p-panel header="Login Example">
+                <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 10px">
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            Login:
+                        </div>
+                        <div class="ui-grid-col-6">
+                            <input pInputText type="text" formControlName="login" class="form-control" name="login">
+                        </div>
+                        <div class="ui-grid-col-4">
+                            <div [hidden]="loginForm.controls['login'].valid || !loginForm.controls['login'].dirty" class="alert alert-danger">
+                                Login is required
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="card flex justify-content-center">
-                            <input type="text" pInputText [(ngModel)]="value2" />
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-2">
+                            Password:
+                        </div>
+                        <div class="ui-grid-col-6">
+                            <input pInputText type="password" formControlName="password" class="form-control" name="password">
+                        </div>
+                        <div class="ui-grid-col-4">
+                            <div [hidden]="loginForm.controls['password'].valid || !loginForm.controls['password'].dirty" class="alert alert-danger">
+                                Password is required
+                            </div>
                         </div>
                     </div>
-                </div>
-               <br>
-               <div class="row">
-                <br>
-                <div class="col-md-12">
-                    <div class="flex justify-content-center">
-                        <p-button label="Submit"></p-button>
+                    <div class="ui-grid-row">
+                        <br>
+                        <div class="ui-grid-col-2"></div>
+                        <div class="ui-grid-col-6">
+                            <button pButton type="submit" label="Submit" [disabled]="!loginForm.valid"></button>
+                        </div>
+                        <div class="ui-grid-col-4"></div>
                     </div>
                 </div>
-               </div>
-            </p-fieldset>
-         
-        </div>
+            </p-panel>
+        </form>
      
     </div>
 </div>
+
+
+

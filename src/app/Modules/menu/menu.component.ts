@@ -11,8 +11,8 @@ export class SistematicMenuComponent {
     ngOnInit() {
         this.items = [
             {
-                label: 'File',
-                icon: 'pi pi-fw pi-file',
+                label: 'Cotizacion',
+                icon: 'pi pi-fw pi-calculator',
                 items: [
                     {
                         label: 'New',
@@ -42,8 +42,8 @@ export class SistematicMenuComponent {
                 ]
             },
             {
-                label: 'Edit',
-                icon: 'pi pi-fw pi-pencil',
+                label: 'Inventario',
+                icon: 'pi pi-fw pi-book',
                 items: [
                     {
                         label: 'Left',
@@ -64,8 +64,8 @@ export class SistematicMenuComponent {
                 ]
             },
             {
-                label: 'Users',
-                icon: 'pi pi-fw pi-user',
+                label: 'Reportes',
+                icon: 'pi pi-fw pi-file-pdf',
                 items: [
                     {
                         label: 'New',
@@ -98,8 +98,8 @@ export class SistematicMenuComponent {
                 ]
             },
             {
-                label: 'Events',
-                icon: 'pi pi-fw pi-calendar',
+                label: 'Configuracion',
+                icon: 'pi pi-fw pi-spin pi-cog',
                 items: [
                     {
                         label: 'Edit',
