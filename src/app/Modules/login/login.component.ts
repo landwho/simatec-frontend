@@ -7,6 +7,9 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
 
+  value1: string ='';
+  value2: string ='';
+
 constructor(){}
 
 

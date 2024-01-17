@@ -1,6 +1,31 @@
 <div class="container">
-    <p>login Works!</p>
-
-
-
+    <div class="d-flex justify-content-center align-items-center h-100vh">
+        <div class="card flex justify-content-center">
+            <p-fieldset legend="Login">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card flex justify-content-center">
+                            <input type="text" pInputText [(ngModel)]="value1" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card flex justify-content-center">
+                            <input type="text" pInputText [(ngModel)]="value2" />
+                        </div>
+                    </div>
+                </div>
+               <br>
+               <div class="row">
+                <br>
+                <div class="col-md-12">
+                    <div class="flex justify-content-center">
+                        <p-button label="Submit"></p-button>
+                    </div>
+                </div>
+               </div>
+            </p-fieldset>
+         
+        </div>
+     
+    </div>
 </div>
