@@ -1,11 +1,13 @@
+
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, tap } from 'rxjs';
 import { ApiService } from './api.service';
-import { environment } from 'src/environments/environment';
+import { environment } from './../../../environments/environment';
 import { LoggedUser, LoginModel } from '../models/loginModel.model';
 import { MatDialog } from '@angular/material/dialog';
 import { UserModel } from '../models/userModel.model';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +29,7 @@ export class AuthService {
     private ApiService: ApiService,
     private Router: Router,
     private dialog: MatDialog,
+    private CookieService:CookieService
   ) {
     this._isLoggedIn$.next(!!this.token);
   }
@@ -62,9 +65,9 @@ export class AuthService {
   signIn(user: any) {
     return this.ApiService.postMethod<LoginModel>('/Login', user, { loaderType: 'dna' }).pipe(
       tap(response => {
-        this.currentUserName = JSON.stringify(response.result.usuario);
-        localStorage.setItem(this.TOKEN_NAME, response.token);
-        localStorage.setItem('parametrizations', JSON.stringify(response.parametrizations));
+        // this.currentUserName = JSON.stringify(response.result.usuario);
+        // localStorage.setItem(this.TOKEN_NAME, response.token);
+        // localStorage.setItem('parametrizations', JSON.stringify(response.parametrizations));
       }),
     );
   }

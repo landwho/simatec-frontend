@@ -1,11 +1,12 @@
+
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import { environment } from './../../../environments/environment';
 import { catchError, tap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { LoaderService } from '../loader/loader-service.service';
+import { LoaderService } from '../loader/loader.service';
 import { TranslateService } from '../services/translate.service';
 type ApiLoaderType = 'loader' | 'dna' | 'skeleton' | 'none';
 type ApiMoreOptions = {
@@ -66,7 +67,8 @@ export class ApiService {
       }),
       catchError((error: HttpErrorResponse) => {
         this.hideLoader(loaderType);
-        if (error.status == 0) this.showErrorMessage(this.TranslateService.instant_child('errorCode','CX_DENIED'));
+        // if (error.status == 0) this.showErrorMessage(this.TranslateService.instant_child('errorCode','CX_DENIED'));
+        if (error.status == 0) this.showErrorMessage("ERR_CONNECTION_REFUSED");
         this.showErrorMessage(this.TranslateService.instant_child('errorCode',error.error.errorCode));
         return throwError(() => error);
       }),
