@@ -1,19 +1,48 @@
 import { NgModule } from '@angular/core';
 import { ExtraOptions, PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [
-  { path: '', redirectTo: 'simatec/login', pathMatch: 'full' },
+export const routes: Routes = [
+  // 🔥 raíz
   {
-    path: 'simatec',
-    loadChildren: () => import('./Modules/login/login.module').then(m=>m.LoginModule),
+    path: '',
+    redirectTo: 'simatec/login',
+    pathMatch: 'full'
   },
+
+  // 🔥 módulo principal
   {
     path: 'simatec',
-    loadChildren: () => import('./Modules/dashboard/dashboard.module').then(m=>m.DashboardModule),
+    children: [
+      {
+        path: '',
+        redirectTo: 'login', // 🔥 IMPORTANTE (evita loops)
+        pathMatch: 'full'
+      },
+      {
+        path: 'login',
+        loadChildren: () =>
+          import('./Modules/login/login-routing')
+            .then(m => m.LOGIN_ROUTES),
+      },
+      {
+        path: 'dashboard',
+        loadChildren: () =>
+          import('./Modules/dashboard/dashboard-routing')
+            .then(m => m.DASHBOARD_ROUTES),
+      },
+      {
+        path: 'ordenes',
+        loadChildren: () =>
+          import('./Modules/ordenes/ordenes-routing')
+            .then(m => m.ORDENES_ROUTES),
+      }
+    ]
   },
+
+  // 🔥 fallback global
   {
-    path: 'simatec',
-    loadChildren: () => import('./Modules/page-view/page-view.module').then(m=>m.PageViewModule),
+    path: '**',
+    redirectTo: 'simatec/login'
   }
 ];
 
@@ -23,9 +52,8 @@ const routerConfig: ExtraOptions = {
   useHash: true,
 };
 
-
 @NgModule({
   imports: [RouterModule.forRoot(routes, routerConfig)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

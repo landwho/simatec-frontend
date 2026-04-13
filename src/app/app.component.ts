@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AuthService } from '@core/auth/auth.service';
 
 @Component({
     selector: 'app-root',
@@ -8,4 +9,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = '4dehr_web_frontend';
+  private readonly AuthService = inject(AuthService);
+  isLoged:boolean = false;
+
+  ngOnInit(){
+    this.AuthService.isLoggedIn$.subscribe(data=>{
+      this.isLoged = data
+    })
+  }
+
 }

@@ -1,11 +1,12 @@
 import { Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard.component';
+import { OrdenesComponent } from './ordenes.component'; 
 import { AuthGuard } from '@core/guards/auth.guard';
 
-export const DASHBOARD_ROUTES: Routes = [
+
+export const ORDENES_ROUTES: Routes = [
   {
     path: '',
-    component: DashboardComponent,
+    component: OrdenesComponent,
     canActivate: [AuthGuard]
   }
 ];

@@ -63,12 +63,12 @@ export class AuthService {
   }
 
   signIn(user: any) {
-    return this.ApiService.postMethod<LoginModel>('/api/auth/login', user, { loaderType: 'dna' }).pipe(
+    return this.ApiService.postMethod<LoginModel>('/api/auth/login', user, { loaderType: 'loader' }).pipe(
       tap((response:any) => {
-        console.log(response)
         // this.currentUserName = JSON.stringify(response.result.usuario);
          localStorage.setItem(this.TOKEN_NAME, response.accessToken);
         // localStorage.setItem('parametrizations', JSON.stringify(response.parametrizations));
+        this._isLoggedIn$.next(true);
       }),
     );
   }
@@ -77,10 +77,12 @@ export class AuthService {
   
   signOut() {
     // Remove token from the local storage
+   
     this.dialog.closeAll();
     localStorage.clear();
     this._isLoggedIn$.next(false);
     this.Router.navigate(['/simatec/login']);
+    return this.ApiService.postMethod('/api/auth/logout',{}, { loaderType: 'loader' });
     
   }
 }

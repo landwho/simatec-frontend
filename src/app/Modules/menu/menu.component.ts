@@ -1,13 +1,43 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { SharedModule } from '@shared/sharedModule.module';
+import { MatIconModule } from '@angular/material/icon';
+// import { SistematicMenuComponent } from './menu.component';
+import { MenubarModule } from 'primeng/menubar';
+import { MenuService } from './menu.service';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { CrearNuevaOrdenModalComponent } from '@modules/ordenes/crear-nueva-orden-modal/crear-nueva-orden-modal.component';
+
 @Component({
     selector: 'app-sistematic-menu',
     templateUrl: './menu.component.html',
     styleUrls: ['./menu.component.css'],
-    standalone: false
+    standalone: true,
+    imports:[
+        MatDialogModule,
+        SharedModule,
+        MatIconModule,
+        MenubarModule
+    ]
 })
 export class SistematicMenuComponent {
+    private readonly MenuService = inject(MenuService);
+
+      readonly dialog = inject(MatDialog);
     items: MenuItem[] | undefined;
+
+    openDialog(): void {
+    const dialogRef = this.dialog.open(CrearNuevaOrdenModalComponent, {
+      data: {},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (result !== undefined) {
+        ;
+      }
+    });
+  }
 
     ngOnInit() {
         this.items = [
@@ -21,7 +51,8 @@ export class SistematicMenuComponent {
                         items: [
                             {
                                 label: 'Bookmark',
-                                icon: 'pi pi-fw pi-bookmark'
+                                icon: 'pi pi-fw pi-bookmark',
+                                command: () => this.openDialog()
                             },
                             {
                                 label: 'Video',
@@ -130,8 +161,14 @@ export class SistematicMenuComponent {
             },
             {
                 label: 'Quit',
-                icon: 'pi pi-fw pi-power-off'
+                icon: 'pi pi-fw pi-power-off',
+                command: () => this.logOut()
             }
         ];
+    }
+
+
+    logOut(){
+        this.MenuService.logOut()
     }
 }

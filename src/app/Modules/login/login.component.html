@@ -1,8 +1,83 @@
 <div class="container">
-    <div class="d-flex justify-content-center align-items-center h-100vh">
+    <div class="d-flex justify-content-center bg align-items-center h-100vh">
+        <div class="container-fluid login-wrapper">
+            <div class="row justify-content-center align-items-center vh-100">
+                <div class="col-md-10 col-lg-8">
+                    <div class="row login-card">
+                        <div class="col-md-6 left">
+                            <div class="content">
+                                <h1>SIMATEC</h1>
+                                <p>Your headline name</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 right">
+                            <h2>Sign in</h2>
+                            <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+                                 @if(loginForm.get('idUser')?.invalid && loginForm.get('idUser')?.touched){
+                                    <mat-error>Please enter a valid email address</mat-error>
+                                }
+                                <input type="text" placeholder="User Name" class="form-control mb-3" formControlName="idUser"  name="usuario"/>
+                                <input  type="password" placeholder="Password" class="form-control mb-3" formControlName="password" name="password"/>
+                                 @if(loginForm.get('password')?.invalid && loginForm.get('password')?.touched){
+                                    <mat-error>Please enter a valid email address</mat-error>
+                                }  
+                                <div [hidden]="loginForm.controls['password'].valid || !loginForm.controls['password'].dirty" class="alert alert-danger">
+                                Password is required
+                            </div>
+                                <button mat-flat-button class="w-100 mb-2" type="submit" label="Submit" [disabled]="!loginForm.valid">Sign in</button>
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
        
-        <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
-            <p-panel header="Login Example">
+        <!-- <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+    
                 <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 10px">
                     <div class="ui-grid-row">
                         <div class="ui-grid-col-2">
@@ -34,16 +109,17 @@
                         <br>
                         <div class="ui-grid-col-2"></div>
                         <div class="ui-grid-col-6">
-                            <button pButton type="submit" label="Submit" [disabled]="!loginForm.valid"></button>
+                 
+                               <button mat-flat-button type="submit" label="Submit" [disabled]="!loginForm.valid">Basic</button>
                         </div>
                         <div class="ui-grid-col-4"></div>
                     </div>
                 </div>
-            </p-panel>
-        </form>
+      
+        </form> -->
      
-    </div>
-</div>
+    <!-- </div>
+</div> -->
 
 
 

@@ -1,8 +1,16 @@
 <!-- LOADING BAR -->
-<div *ngIf="this.loader.getLoading()" class="Loading-Data-progress-bar"></div>
+
+@if(this.loader.getLoading()){
+<div  class="Loading-Data-progress-bar">
+  <h1>LOADER ALSDFAKJFDSLKAJFKJ</h1>
+</div>
+}
+
+
 
 <!-- DNA loader for LoginPageComponent -->
-<div class="overlay-adn" *ngIf="this.loader.getDNALoading()">
+ @if(this.loader.getDNALoading()){
+  <div class="overlay-adn">
   <div class="wrapper">
     <div id="dot1"></div>
     <div id="dot2"></div>
@@ -21,6 +29,8 @@
     <div id="base5"></div>
   </div>
 </div>
+ }
+
 
 <!-- PILL LOADER -->
 
@@ -28,6 +38,6 @@
     <span></span>
 </div> -->
 
-<main *ngIf="this.loader.getSpiner()">
+<!-- <main *ngIf="this.loader.getSpiner()">
   <div class="cssload-speeding-wheel"></div>
-</main>
+</main> -->

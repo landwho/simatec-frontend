@@ -7,19 +7,32 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from '@core/core.module';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { JwtInterceptor } from '@core/interceptors/jwt-interceptor.interceptor';
+import Aura from '@primeng/themes/aura';
+import Lara from '@primeng/themes/lara'
+import { providePrimeNG } from 'primeng/config';
+import { SistematicMenuComponent } from '@modules/menu/menu.component';
 
 @NgModule({ declarations: [
-        AppComponent,
+        AppComponent, 
     ],
-    bootstrap: [AppComponent], imports: [BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        CoreModule], providers: [
+    bootstrap: [AppComponent],
+    imports: [BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    CoreModule,
+    SistematicMenuComponent
+    ], providers: [
         {
             provide: HTTP_INTERCEPTORS,
             useClass: JwtInterceptor,
             multi: true,
         },
-        provideHttpClient(withInterceptorsFromDi())
+        provideHttpClient(withInterceptorsFromDi()),
+        providePrimeNG({
+            theme: {
+                preset: Lara,
+                options: { colorScheme: 'light' }
+            }
+        })
     ] })
 export class AppModule { }

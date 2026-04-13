@@ -12,8 +12,9 @@ export class LoginService {
     // private Subject     = inject(Subject)
     // private HttpClient  = inject(HttpClient)
     private readonly AuthService = inject(AuthService)
+    private readonly ApiService = inject(ApiService)
 
-    constructor(private ApiService:ApiService){}
+    constructor(){}
 
     signIn(obj:any){
         return this.AuthService.signIn( obj)
