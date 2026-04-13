@@ -38,7 +38,7 @@ export class OrdenesComponent implements AfterViewInit{
 
 
   ngOnInit() {
-     
+     document.body.style.background = '#faf9fd';
     this.obtenerCLientes()
 
   }
