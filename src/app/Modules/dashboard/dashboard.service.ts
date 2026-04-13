@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
+import { ApiService } from '@core/auth/api.service';
     
 @Injectable({
     providedIn: 'root',
@@ -6,6 +7,14 @@ import { Injectable } from '@angular/core';
 
 
 export class DashboardService {
+
+
+    private ApiService = inject(ApiService);
+
+    getOrderList(){
+        return this.ApiService.getMethod('/api/order')
+    }
+
     getProductsData() {
         return [
             {

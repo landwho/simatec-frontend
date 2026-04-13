@@ -6,9 +6,10 @@ import { MatIconModule } from '@angular/material/icon';
 
 //components
 import { PageViewComponent } from './page-view.component';
+
 @NgModule({
   declarations: [
-    PageViewComponent
+    // PageViewComponent
   ],
   imports: [
     CommonModule,

@@ -9,10 +9,10 @@
                             Login:
                         </div>
                         <div class="ui-grid-col-6">
-                            <input pInputText type="text" formControlName="usuario" class="form-control" name="usuario">
+                            <input pInputText type="text" formControlName="idUser" class="form-control" name="usuario">
                         </div>
                         <div class="ui-grid-col-4">
-                            <div [hidden]="loginForm.controls['usuario'].valid || !loginForm.controls['usuario'].dirty" class="alert alert-danger">
+                            <div [hidden]="loginForm.controls['idUser'].valid || !loginForm.controls['idUser'].dirty" class="alert alert-danger">
                                 Login is required
                             </div>
                         </div>

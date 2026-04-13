@@ -63,10 +63,11 @@ export class AuthService {
   }
 
   signIn(user: any) {
-    return this.ApiService.postMethod<LoginModel>('/Login', user, { loaderType: 'dna' }).pipe(
-      tap(response => {
+    return this.ApiService.postMethod<LoginModel>('/api/auth/login', user, { loaderType: 'dna' }).pipe(
+      tap((response:any) => {
+        console.log(response)
         // this.currentUserName = JSON.stringify(response.result.usuario);
-        // localStorage.setItem(this.TOKEN_NAME, response.token);
+         localStorage.setItem(this.TOKEN_NAME, response.accessToken);
         // localStorage.setItem('parametrizations', JSON.stringify(response.parametrizations));
       }),
     );

@@ -4,9 +4,10 @@ import { Validators,FormControl,FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css'],
+    standalone:false
 })
 export class LoginComponent {
 
@@ -21,7 +22,7 @@ submitted = false;
 
 ngOnInit() {
     this.loginForm = new FormGroup({
-        'usuario': new FormControl('', Validators.required),
+        'idUser': new FormControl('', Validators.required),
         'password': new FormControl('', Validators.required)
     });
 }
@@ -33,7 +34,7 @@ onSubmit() {
     next:(data)=>{
       this.submitted = true;
       this.Router.navigate(['simatec/dashboard'])
-      console.log(data)
+      // console.log(data)
     },
     error:(err)=>{
       console.log(err)

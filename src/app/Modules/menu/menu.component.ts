@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 @Component({
-  selector: 'app-sistematic-menu',
-  templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.css']
+    selector: 'app-sistematic-menu',
+    templateUrl: './menu.component.html',
+    styleUrls: ['./menu.component.css'],
+    standalone: false
 })
 export class SistematicMenuComponent {
     items: MenuItem[] | undefined;

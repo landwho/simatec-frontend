@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { ExtraOptions, PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'simatec', pathMatch: 'full' },
+  { path: '', redirectTo: 'simatec/login', pathMatch: 'full' },
   {
     path: 'simatec',
     loadChildren: () => import('./Modules/login/login.module').then(m=>m.LoginModule),
@@ -22,6 +22,7 @@ const routerConfig: ExtraOptions = {
   scrollPositionRestoration: 'enabled',
   useHash: true,
 };
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, routerConfig)],

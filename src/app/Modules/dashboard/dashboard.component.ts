@@ -4,7 +4,8 @@ import { Product } from './dashboardProductModel.model';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
+  standalone:false
 })
 export class DashboardComponent {
   products!: Product[];
@@ -15,20 +16,21 @@ export class DashboardComponent {
   constructor(private DashboardService: DashboardService) {}
 
   ngOnInit() {
-      this.DashboardService.getProductsMini().then((data) => {
-          this.products = data;
-      });
-
-      this.cities = [
-        {name: 'New York', code: 'NY'},
-        {name: 'Rome', code: 'RM'},
-        {name: 'London', code: 'LDN'},
-        {name: 'Istanbul', code: 'IST'},
-        {name: 'Paris', code: 'PRS'}
-    ];
+     
+    this.obtenerCLientes()
 
   }
+
+  obtenerCLientes(){
+    this.DashboardService.getOrderList().subscribe(data=>{
+      console.log(data)
+    })
+  }
+
 }
+
+
+
 
 
 interface City {
