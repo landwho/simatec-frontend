@@ -1,64 +1,182 @@
 <h2 mat-dialog-title>Nueva Orden</h2>
 <mat-dialog-content class="mat-typography">
-  <h3>Develop across all platforms</h3>
-  <p>Learn one way to build applications with Angular and reuse your code and abilities to build
-    apps for any deployment target. For web, mobile web, native mobile and native desktop.</p>
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="col-md-10">
+                <mat-card class="example-card" appearance="outlined">
+                    <mat-card-header>
+                        <h6>{{patientCardText}}</h6>
+                    </mat-card-header>
+                    <mat-card-content>
+                    
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Codigo paciente</mat-label>
+                                    <input matInput placeholder="Placeholder" formControlName="patientCode">
+                                     <mat-icon matSuffix>barcode</mat-icon>
+                                </mat-form-field>
+                            </div>
+                    
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <button mat-flat-button class="form-control"><mat-icon>add_2</mat-icon></button>
+                                </div>
+                            </div>
+                        </div>
 
-  <h3>Speed &amp; Performance</h3>
-  <p>Achieve the maximum speed possible on the Web Platform today, and take it further, via Web
-    Workers and server-side rendering. Angular puts you in control over scalability. Meet huge
-    data requirements by building data models on RxJS, Immutable.js or another push-model.</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Nombres</mat-label>
+                                    <input matInput placeholder="Placeholder" formControlName="patientName">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Apellidos</mat-label>
+                                    <input matInput placeholder="Placeholder" formControlName="lastName">
+                                </mat-form-field>
+                            </div>
+                        </div>
 
-  <h3>Incredible tooling</h3>
-  <p>Build features quickly with simple, declarative templates. Extend the template language with
-    your own components and use a wide array of existing components. Get immediate Angular-specific
-    help and feedback with nearly every IDE and editor. All this comes together so you can focus
-    on building amazing apps rather than trying to make the code work.</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Choose a date</mat-label>
+                                    <input matInput [matDatepicker]="datepicker" formControlName="birth"/>
+                                    <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+                                    <mat-datepicker #datepicker>
+                                        <mat-datepicker-actions>
+                                        <button mat-button matDatepickerCancel>Cancel</button>
+                                        <button mat-raised-button matDatepickerApply>Apply</button>
+                                        </mat-datepicker-actions>
+                                    </mat-datepicker>
+                                </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-radio-group aria-label="Genero" formControlName="gender">
+                                <mat-radio-button value="1">Femenino</mat-radio-button>
+                                <mat-radio-button value="2">Maculino</mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                        </div>
 
-  <h3>Loved by millions</h3>
-  <p>From prototype through global deployment, Angular delivers the productivity and scalable
-    infrastructure that supports Google's largest applications.</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Telefono</mat-label>
+                                    <input matInput type="text" placeholder="Placeholder" formControlName="phone">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Email</mat-label>
+                                    <input matInput type="email" placeholder="Placeholder" formControlName="email">
+                                </mat-form-field>
+                            </div>
+                        </div>
 
-  <h3>What is Angular?</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Medico</mat-label>
+                                    <mat-select formControlName="idDoctor">
+                                        @for (doc of physicians; track doc.iddoctor) {
+                                            <mat-option [value]="doc.iddoctor">
+                                                {{ doc.firstname }} {{ doc.lastname }}
+                                            </mat-option>
+                                            }
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
 
-  <p>Angular is a platform that makes it easy to build applications with the web. Angular
-    combines declarative templates, dependency injection, end to end tooling, and integrated
-    best practices to solve development challenges. Angular empowers developers to build
-    applications that live on the web, mobile, or the desktop</p>
+                            <div class="col-md-6">
+                                <mat-form-field class="w-100" appearance="outline">
+                                    <mat-label>Procedencia</mat-label>
+                                    <mat-select>
+                                        <mat-option value="idOrigin">Origen</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-">
+                                <div class="mb-3">
+                                    <mat-form-field class="w-100" appearance="outline">
+                                        <mat-label>Observaciones</mat-label>
+                                        <input matInput placeholder="Placeholder">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>  
+                    </mat-card-content>
+                </mat-card>
+                <mat-card class="example-card mt-2" appearance="outlined">
+                    <mat-card-header>
+                        <h6>{{areaCardText}}</h6>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="row">
+                        @for (area of areas; track area.idarea) {
+                            <div class="col-md-6">
+                                <mat-accordion>
+                                    <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+                                        <mat-expansion-panel-header>
+                                        <mat-panel-title>  {{area.name}}</mat-panel-title>
+                                        </mat-expansion-panel-header>
+                                        <section class="example-section" [formGroup]="toppings">
+                                            <mat-checkbox formControlName="pepperoni">Pepperoni</mat-checkbox>
+                                            <mat-checkbox formControlName="extracheese">Extra Cheese</mat-checkbox>
+                                            <mat-checkbox formControlName="mushroom">Mushroom</mat-checkbox>
+                                        </section>
+                                    </mat-expansion-panel>
+                                </mat-accordion>
+                            </div>
+                        }
+                    </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div class="col-md-2">
+                <mat-card class="example-card h-100" appearance="outlined">
+                    <mat-card-header>
+                        <h6>{{resumenCardText}}</h6>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <p><strong>Paciente:</strong> {{ form.value.patientName }} {{ form.value.lastName }}</p>
+                        <p><strong>Médico:</strong> {{ form.value.physician }}</p>
+                        <p><strong>Áreas seleccionadas:</strong></p>
 
-  <h3>Architecture overview</h3>
+                        <ul>
+                        @for (a of selectedAreas; track a.area) {
+                            <li>
+                            <strong>{{ a.area }}</strong>
+                            <ul>
+                                @for (item of a.items; track item) {
+                                <li>{{ item }}</li>
+                                }
+                            </ul>
+                            </li>
+                        }
+                        </ul>
+                    </mat-card-content>
+                </mat-card>
+                
 
-  <p>Angular is a platform and framework for building client applications in HTML and TypeScript.
-  Angular is itself written in TypeScript. It implements core and optional functionality as a
-  set of TypeScript libraries that you import into your apps.</p>
 
-  <p>The basic building blocks of an Angular application are NgModules, which provide a compilation
-  context for components. NgModules collect related code into functional sets; an Angular app is
-  defined by a set of NgModules. An app always has at least a root module that enables
-  bootstrapping, and typically has many more feature modules.</p>
 
-  <p>Components define views, which are sets of screen elements that Angular can choose among and
-  modify according to your program logic and data. Every app has at least a root component.</p>
 
-  <p>Components use services, which provide specific functionality not directly related to views.
-  Service providers can be injected into components as dependencies, making your code modular,
-  reusable, and efficient.</p>
 
-  <p>Both components and services are simply classes, with decorators that mark their type and
-  provide metadata that tells Angular how to use them.</p>
+            </div>
+        </div>
+ 
+    </form>
 
-  <p>The metadata for a component class associates it with a template that defines a view. A
-  template combines ordinary HTML with Angular directives and binding markup that allow Angular
-  to modify the HTML before rendering it for display.</p>
-
-  <p>The metadata for a service class provides the information Angular needs to make it available
-  to components through Dependency Injection (DI).</p>
-
-  <p>An app's components typically define many views, arranged hierarchically. Angular provides
-  the Router service to help you define navigation paths among views. The router provides
-  sophisticated in-browser navigational capabilities.</p>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="crearOrden()">Crear</button>
 </mat-dialog-actions>

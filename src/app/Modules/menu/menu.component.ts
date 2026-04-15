@@ -28,7 +28,12 @@ export class SistematicMenuComponent {
 
     openDialog(): void {
     const dialogRef = this.dialog.open(CrearNuevaOrdenModalComponent, {
-      data: {},
+        width: '95vw',
+        // height: '95vh',
+        maxWidth: '95vw',
+        // maxHeight: '95vh',
+        panelClass: 'full-screen-modal',
+        data: {},
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -166,7 +171,7 @@ export class SistematicMenuComponent {
                 label: 'Quit',
                 icon: 'pi pi-fw pi-power-off',
                 command: () => this.logOut(),
-                
+
             }
         ];
     }

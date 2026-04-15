@@ -60,7 +60,7 @@ export class ApiService {
   postMethod<T>(endpoint: string, data: any, { params, loaderType }: ApiMoreOptions = {}) {
     const url = `${environment.URLBase}${endpoint}`;
     this.showLoader(loaderType);
-    // this.LoaderService.showSpiner();
+    this.LoaderService.showSpiner();
     return this.HttpClient.post<T>(url, data, { params, withCredentials:true }).pipe(
       tap(() => {
         this.hideLoader(loaderType);
@@ -69,7 +69,7 @@ export class ApiService {
         this.hideLoader(loaderType);
         // if (error.status == 0) this.showErrorMessage(this.TranslateService.instant_child('errorCode','CX_DENIED'));
         if (error.status == 0) this.showErrorMessage("ERR_CONNECTION_REFUSED");
-        this.showErrorMessage(this.TranslateService.instant_child('errorCode',error.error.errorCode));
+        this.showErrorMessage(error.error.message);
         return throwError(() => error);
       }),
     );
