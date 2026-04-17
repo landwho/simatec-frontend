@@ -1,48 +1,67 @@
 <br>
 <div class="container-fluid">
- 
-    <h1>ordenes</h1>
 
-    <table mat-table [dataSource]="dataSource">
+    <mat-card class="mat-elevation-z8" appearance="outlined">
+                 
+      <mat-card-content>
 
-    <ng-container matColumnDef="idorder">
-    <th scope="col" mat-header-cell *matHeaderCellDef> ID </th>
-    <td data-label="ID" mat-cell *matCellDef="let element"> {{element.idorder}} </td>
-  </ng-container>
-
+  <table mat-table [dataSource]="dataSource" class="rwd-table">
     <ng-container matColumnDef="ordernumber">
-    <th scope="col" mat-header-cell *matHeaderCellDef> Orden </th>
-    <td data-label="Account" mat-cell *matCellDef="let element"> {{element.ordernumber}} </td>
-  </ng-container>
+      <th scope="col" mat-header-cell *matHeaderCellDef> No.Orden </th>
+      <td data-label="No.Orden " mat-cell *matCellDef="let element"> {{element.ordernumber}} </td>
+    </ng-container>
 
     <ng-container matColumnDef="dateorder">
         <th scope="col" mat-header-cell *matHeaderCellDef> Fecha </th>
-        <td data-label="Orden" mat-cell *matCellDef="let element">
-        {{element.dateorder}}
+        <td data-label="Fecha" mat-cell *matCellDef="let element">
+          {{element.dateorder | date:'dd-MM-yyyy' }}
         </td>
     </ng-container>
 
-  <ng-container matColumnDef="patientname">
-    <th scope="col" mat-header-cell *matHeaderCellDef> Paciente </th>
-    <td data-label="Paciente" mat-cell *matCellDef="let element"> {{element.patientname}} </td>
-  </ng-container>
+    <ng-container matColumnDef="patientcode">
+      <th scope="col" mat-header-cell *matHeaderCellDef> codigo </th>
+      <td data-label="codigo" mat-cell *matCellDef="let element"> {{element.patientcode}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="patientcode">
-    <th scope="col" mat-header-cell *matHeaderCellDef> codigo </th>
-    <td data-label="codigo" mat-cell *matCellDef="let element"> {{element.patientcode}} </td>
-  </ng-container>
+    <ng-container matColumnDef="firstname">
+      <th scope="col" mat-header-cell *matHeaderCellDef> Nombre </th>
+      <td data-label="Nombres" mat-cell *matCellDef="let element"> {{element.firstname}} </td>
+    </ng-container>
 
-   <ng-container matColumnDef="status">
-    <th scope="col" mat-header-cell *matHeaderCellDef> status </th>
-    <td data-label="status" mat-cell *matCellDef="let element"> {{element.status}} </td>
-  </ng-container>
+    <ng-container matColumnDef="lastname">
+      <th scope="col" mat-header-cell *matHeaderCellDef> Apellido </th>
+      <td data-label="Apellidos" mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+    </ng-container>
 
+    <ng-container matColumnDef="gender">
+      <th scope="col" mat-header-cell *matHeaderCellDef> Genero </th>
+      <td data-label="Genero" mat-cell *matCellDef="let element"> 
+        
+        @if(element.gender ==="M" ){
+          <mat-icon class="blue">boy</mat-icon>
+        }
+         @if(element.gender ==="F" ){
+          <mat-icon class="red">girl</mat-icon>
+        }
 
+      
+      </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <ng-container matColumnDef="status">
+      <th scope="col" mat-header-cell *matHeaderCellDef> status </th>
+      <td data-label="status" mat-cell *matCellDef="let element"> {{element.status}} </td>
+    </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns" class="myhead"></tr>>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
 </table>
+
+
+        </mat-card-content>
+        </mat-card>
+
 
 
 

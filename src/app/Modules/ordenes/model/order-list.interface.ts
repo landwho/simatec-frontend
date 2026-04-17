@@ -1,8 +1,10 @@
 export interface OrderListInterface{
-    dateorder:string;
-    idorder:string;
-    ordernumber: string;
+    dateorder?:string;
+    idorder?:string;
+    ordernumber?: string;
     patientcode:string; 
-    patientname:string; 
-    status: number;
+    firstname: string;
+    lastname:string; 
+    status?: number;
+    gender?: string;
 }

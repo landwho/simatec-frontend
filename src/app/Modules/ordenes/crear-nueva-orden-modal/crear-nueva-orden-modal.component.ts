@@ -16,6 +16,13 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { PhysicianInterfaceModel,AreaInterfaceModel } from '@shared/shared-intreface.model';
 import { OrderInterfaceModel } from './crear-nueva-orden.interface';
+import { AreaCatalogInterfaceModel, OrderTypeInterfaceModel, OriginInterfaceModel } from '@shared/shared-services/shared-services.interface';
+import { CommonModule } from '@angular/common';
+import {MatListModule} from '@angular/material/list';
+import { OrderListInterface } from '../model/order-list.interface';
+import { Validators } from '@angular/forms';
+
+import { OrdenesService } from '../ordenes.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -29,7 +36,8 @@ import { OrderInterfaceModel } from './crear-nueva-orden.interface';
         MatCardModule, MatIconModule, MatSelectModule,
         MatDatepickerModule, MatRadioModule,
         MatExpansionModule, MatCheckboxModule,
-        ReactiveFormsModule
+        ReactiveFormsModule, CommonModule,
+        MatListModule 
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -41,6 +49,7 @@ export class CrearNuevaOrdenModalComponent {
     readonly dialogRef = inject(MatDialogRef<CrearNuevaOrdenModalComponent>);
     readonly panelOpenState = signal(false);
     private readonly FormBuilder = inject(FormBuilder);
+    private readonly OrdenesService = inject(OrdenesService)
 
     physicianControl = new FormControl<number | null>(null);
     form!: FormGroup
@@ -50,141 +59,204 @@ export class CrearNuevaOrdenModalComponent {
     areaCardText:string = "Estudios relacionados";
     resumenCardText:string = "resumen de la orden"
     physicians: PhysicianInterfaceModel[]= []
-    areas:AreaInterfaceModel[] =[]
-   
+    areas:AreaCatalogInterfaceModel[] =[];
+    origin:OriginInterfaceModel[] = [];
+    orderType:OrderTypeInterfaceModel[]=[];
+    selectedDetails: any[] = [];
 
     constructor(){
         this.initForm();
-        this.getAreas();
         this.getCatalogos();
     }
 
     ngOnInit(){
-        
-        this.getAreas();
+        this.getCatalogos();
+        this.form.valueChanges.subscribe(() => {
+            this.selectedDetails = this.getDetails();
+        });
     }
 
     onNoClick(): void {
         this.dialogRef.close();
     }
 
-
-    getAreas() {
-        this.SharedServices.getAreas().subscribe({
-            next: data => {
-            this.areas = data;
-             this.ChangeDetectorRef.detectChanges();
-              this.buildAreaControls(); // 👈 clave
-            },
-            error: err => {}
-        });
-    }
-
     getCatalogos(){
-        this.CrearNuevaOrdenModalService.getPhysician().subscribe(data=>{
+        this.CrearNuevaOrdenModalService.getCatalogs().subscribe(data=>{
             console.log(data.physician)
             this.physicians = data.physician
+            this.origin = data.origin
+            this.orderType = data.orderType
+            this.areas = data.test
+            if (!this.areasForm || Object.keys(this.areasForm.controls).length === 0) {
+                this.buildAreaControls(); // 👈 solo una vez
+            }
+            this.ChangeDetectorRef.detectChanges();
         })
     }
 
 
-
-
-
     initForm() {
         this.form = this.FormBuilder.group({
-            idOrderType:    [1],
-            idOrigin:       [1],
-            idDoctor:       [null],
-            idPatient:      [123],
-            patientCode:    [''],
-            patientName:    [''],
-            birth:          [''],
-            phone:          [''],
-            email:          [''],
-            details: this.FormBuilder.array([]) ,
+            idOrderType: [null, Validators.required],
+            idOrigin:    [null, Validators.required],
+            idDoctor:    [null, Validators.required],
 
-            firstName:      [''],
-            lastName:       [''],
-            gender:         [''],
-            observaciones:  [''],
-            areas: this.FormBuilder.group({}) 
+            patientCode: [null, Validators.required],
+            patientName: [null],
 
+            birth:       [null, Validators.required],
+            phone:       [''],
+            email:       ['', Validators.email],
+
+            firstName:   [null, Validators.required],
+            lastName:    [null, Validators.required],
+            gender:      [null, Validators.required],
+            notes:       [''],
+            details:     this.FormBuilder.array([])
+            // details:     this.FormBuilder.array([], Validators.required)
         });
     }
 
-    readonly toppings = this.FormBuilder.group({
-        pepperoni: false,
-        extracheese: false,
-        mushroom: false,
-    });
-
-    // 🔥 crear checkboxes dinámicos por área
-buildAreaControls() {
-  const group: any = {};
-
-  this.areas.forEach(area => {
-    group[area.idarea] = this.FormBuilder.group({
-      pepperoni: false,
-      extracheese: false,
-      mushroom: false
-    });
-  });
-
-  this.areasForm = this.FormBuilder.group(group);
-}
+    buildAreaControls() {
+        const group: any = {};
+        this.areas.forEach(area => {
+            const testsGroup: any = {};
+            area.tests.forEach(test => {
+            testsGroup[test.idTest.toString()] = this.FormBuilder.control(false);
+            });
+            group[area.idArea.toString()] = this.FormBuilder.group(testsGroup);
+        });
+        this.areasForm = this.FormBuilder.group(group);
+    }
 
     crearOrden() {
-
-        const payload: OrderInterfaceModel = this.form.value;
-
-        console.log(payload)
-
-        // this.CrearNuevaOrdenModalService.createOrder(payload).subscribe(res => {
-        //     console.log(res);
-        // });
-
-
-
-          this.CrearNuevaOrdenModalService.createOrder(payload).subscribe({
+        if (this.form.invalid) {
+            this.form.markAllAsTouched();
+            return;
+        }
+        const payload: OrderInterfaceModel = {
+            ...this.form.value,
+            details: this.getDetails()
+        };
+        this.CrearNuevaOrdenModalService.createOrder(payload).subscribe({
             next: data => {
-                console.log(data);
-            // this.areas = data;
-            //  this.ChangeDetectorRef.detectChanges();
-            //   this.buildAreaControls(); // 👈 clave
+                const nuevaOrden: OrderListInterface = {
+                    ordernumber:    payload.ordernumber,
+                    dateorder:      payload.birth,
+                    firstname:      payload.firstName,
+                    lastname:       payload.lastName,
+                    patientcode:    payload.patientCode,
+                    status:         payload.status,
+                    gender:         payload.gender
+                };
+                this.OrdenesService.addOrder(nuevaOrden);
             },
             error: err => {
-            console.error('Error areas:', err);
+            console.error('Error:', err);
             }
         });
     }
 
+    get details(): { idTest: number; priority: number }[] {
+        if (!this.areasForm) return [];
 
+        const result: any[] = [];
+        const values = this.areasForm.value;
 
-    get selectedAreas() {
-    if (!this.areasForm) return []; // 👈 evita el error
+        Object.keys(values).forEach(areaId => {
+            const tests = values[areaId];
 
-    const result: any[] = [];
-    const values = this.areasForm.value;
-
-    this.areas.forEach(area => {
-        const areaValues = values[area.idarea];
-
-        if (!areaValues) return;
-
-        const selected = Object.entries(areaValues)
-        .filter(([_, v]) => v)
-        .map(([k]) => k);
-
-        if (selected.length > 0) {
-        result.push({
-            area: area.name,
-            items: selected
+            Object.keys(tests).forEach(testId => {
+            if (tests[testId]) {
+                result.push({
+                idTest: Number(testId),
+                priority: 0
+                });
+            }
+            });
         });
-        }
-    });
 
-    return result;
+        return result;
+    }
+
+
+    getDetails(): { idTest: number; priority: number }[] {
+        if (!this.areasForm) return [];
+
+        const result: any[] = [];
+        const values = this.areasForm.value;
+
+        Object.keys(values).forEach(areaId => {
+            const tests = values[areaId];
+
+            Object.keys(tests).forEach(testId => {
+            if (tests[testId]) {
+                result.push({
+                idTest: Number(testId),
+                priority: 0
+                });
+            }
+            });
+        });
+
+        return result;
+    }
+
+    get selectedTests() {
+        if (!this.areasForm || !this.areas) return [];
+
+        const values = this.areasForm.value;
+        const result: any[] = [];
+
+        this.areas.forEach(area => {
+            const testsGroup = values[area.idArea];
+
+            if (!testsGroup) return;
+
+            Object.keys(testsGroup).forEach(testId => {
+            if (testsGroup[testId]) {
+                const test = area.tests.find(t => t.idTest === Number(testId));
+
+                if (test) {
+                result.push({
+                    idTest: test.idTest,
+                    name: test.testName,
+                    area: area.areaName,
+                    price: test.price
+                });
+                }
+            }
+            });
+        });
+
+        return result;
+    }
+
+    removeTest(testId: number, areaId: number) {
+        const control = this.areasForm
+            .get(areaId.toString())
+            ?.get(testId.toString());
+
+        control?.setValue(false);
+    }
+
+
+    getAreaId(testId: number): number {
+        for (const area of this.areas) {
+            if (area.tests.some(t => t.idTest === testId)) {
+            return area.idArea;
+            }
+        }
+        return 0;
+    }
+
+    get totalPrice(): number {
+        return this.selectedTests.reduce((acc, test) => acc + (test.price || 0), 0);
+    }
+
+
+    ngOnDestroy(){
+
     }
 
 }

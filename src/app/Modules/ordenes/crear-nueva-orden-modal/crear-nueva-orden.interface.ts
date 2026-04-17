@@ -13,11 +13,20 @@ export interface OrderInterfaceModel{
   idDoctor:     number;
   idPatient:    number;
   patientCode:  string;
-  patientName:  string;
+  firstName:    string;
+  lastName:     string;
   birth:        string;
   phone:        string;
   email:        string;
-  details:      OrderDetailInterfaceModel[]
+  notes:        string;
+  details:      OrderDetailInterfaceModel[],
+
+
+  ordernumber?: string;
+  dateorder?:   string;
+  status?:      number;
+  gender?:      string;
+
 }
 
 export interface OrderDetailInterfaceModel{

@@ -17,7 +17,7 @@ export class SharedServices {
     }
 
     getCatalogos(catalogs: CatalogType[]): Observable<CatalogosInterfaceModel> {
-        return this.ApiService.postMethod<CatalogosInterfaceModel>('/api/catalog', {catalogs});
+        return this.ApiService.postMethod<CatalogosInterfaceModel>('/api/catalog', {catalogs, "idPriceList":1});
     }
 
     getBranches(idBranch:number){

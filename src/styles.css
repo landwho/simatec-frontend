@@ -1,17 +1,22 @@
 @import url(assets/styles/app.css);
-/* @import 'primeng/resources/themes/lara-light-blue/theme.css';
-@import 'primeng/resources/primeng.min.css';
-@import 'primeicons/primeicons.css'; */
-/* @import '@primeng/themes/lara-light-blue/theme.css';
-@import 'primeicons/primeicons.css'; */
-/* @import '../node_modules/@primeng/themes/lara';  */
-/* @import '../node_modules/primeicons/primeicons.css'; */
-/* @import 'primeng/resources/primeng.min.css'; */
-/* @import '@primeng/themes/lara/theme.css'; */
-/* @import 'primeicons/primeicons.css';
-@import '../node_modules/primeicons/primeicons.css'; */
 @import 'primeicons/primeicons.css';
 
+:root{
+    --bg-blue:linear-gradient(135deg, #0d6efd, #0a3d62);
+    --bg-greem:linear-gradient(135deg, #1ef219, #19620a);
+}
+.bg-primary{
+    background: var(--bg-blue);
+}
+.bg-success{
+    background: var(--bg-green);
+}
+.blue{
+    color: #728ada;
+}
+.red{
+    color: #ba8787;
+}
 a{text-decoration: inherit !important;} 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -34,4 +39,31 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
     padding: 0 12px !important;
+}
+
+.form-check-input:checked {
+    background: var(--bg-blue);
+    /* background-color: #0d6efd; */
+    border-color: #040910;
+}
+
+.form-control:focus {
+  border-color: #ff5722;
+  box-shadow: 0 0 0 0.2rem rgba(12, 38, 156, 0.25);
+}
+
+.mat-mdc-form-field:hover .mdc-notched-outline__leading,
+.mat-mdc-form-field:hover .mdc-notched-outline__notch,
+.mat-mdc-form-field:hover .mdc-notched-outline__trailing {
+  border-color: #999;
+}
+
+.mat-mdc-form-field.mat-focused .mdc-notched-outline__leading,
+.mat-mdc-form-field.mat-focused .mdc-notched-outline__notch,
+.mat-mdc-form-field.mat-focused .mdc-notched-outline__trailing {
+  border-color: #959ebd !important;
+}
+
+.mat-expansion-panel{
+    background: #ffffff !important;
 }
