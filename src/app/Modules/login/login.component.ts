@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
     selector: 'app-login',
@@ -16,7 +17,8 @@ import {MatInputModule} from '@angular/material/input';
       ReactiveFormsModule,
       MatButtonModule,
       MatCardModule,
-      MatInputModule
+      MatInputModule,
+      TranslocoModule,
     ]
 })
 export class LoginComponent {

@@ -2,55 +2,52 @@
 <div class="container-fluid">
 
     <mat-card class="mat-elevation-z8" appearance="outlined">
-                 
+
       <mat-card-content>
 
   <table mat-table [dataSource]="dataSource" class="rwd-table">
     <ng-container matColumnDef="ordernumber">
-      <th scope="col" mat-header-cell *matHeaderCellDef> No.Orden </th>
-      <td data-label="No.Orden " mat-cell *matCellDef="let element"> {{element.ordernumber}} </td>
+      <th scope="col" mat-header-cell *matHeaderCellDef> {{ 'orders.col_number' | transloco }} </th>
+      <td [attr.data-label]="'orders.col_number' | transloco" mat-cell *matCellDef="let element"> {{element.ordernumber}} </td>
     </ng-container>
 
     <ng-container matColumnDef="dateorder">
-        <th scope="col" mat-header-cell *matHeaderCellDef> Fecha </th>
-        <td data-label="Fecha" mat-cell *matCellDef="let element">
+        <th scope="col" mat-header-cell *matHeaderCellDef> {{ 'orders.col_date' | transloco }} </th>
+        <td [attr.data-label]="'orders.col_date' | transloco" mat-cell *matCellDef="let element">
           {{element.dateorder | date:'dd-MM-yyyy' }}
         </td>
     </ng-container>
 
     <ng-container matColumnDef="patientcode">
-      <th scope="col" mat-header-cell *matHeaderCellDef> codigo </th>
-      <td data-label="codigo" mat-cell *matCellDef="let element"> {{element.patientcode}} </td>
+      <th scope="col" mat-header-cell *matHeaderCellDef> {{ 'orders.col_code' | transloco }} </th>
+      <td [attr.data-label]="'orders.col_code' | transloco" mat-cell *matCellDef="let element"> {{element.patientcode}} </td>
     </ng-container>
 
     <ng-container matColumnDef="firstname">
-      <th scope="col" mat-header-cell *matHeaderCellDef> Nombre </th>
-      <td data-label="Nombres" mat-cell *matCellDef="let element"> {{element.firstname}} </td>
+      <th scope="col" mat-header-cell *matHeaderCellDef> {{ 'orders.col_name' | transloco }} </th>
+      <td [attr.data-label]="'orders.col_name' | transloco" mat-cell *matCellDef="let element"> {{element.firstname}} </td>
     </ng-container>
 
     <ng-container matColumnDef="lastname">
-      <th scope="col" mat-header-cell *matHeaderCellDef> Apellido </th>
-      <td data-label="Apellidos" mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+      <th scope="col" mat-header-cell *matHeaderCellDef> {{ 'orders.col_lastname' | transloco }} </th>
+      <td [attr.data-label]="'orders.col_lastname' | transloco" mat-cell *matCellDef="let element"> {{element.lastname}} </td>
     </ng-container>
 
     <ng-container matColumnDef="gender">
-      <th scope="col" mat-header-cell *matHeaderCellDef> Genero </th>
-      <td data-label="Genero" mat-cell *matCellDef="let element"> 
-        
+      <th scope="col" mat-header-cell *matHeaderCellDef> {{ 'orders.col_gender' | transloco }} </th>
+      <td [attr.data-label]="'orders.col_gender' | transloco" mat-cell *matCellDef="let element">
         @if(element.gender ==="M" ){
           <mat-icon class="blue">boy</mat-icon>
         }
-         @if(element.gender ==="F" ){
+        @if(element.gender ==="F" ){
           <mat-icon class="red">girl</mat-icon>
         }
-
-      
       </td>
     </ng-container>
 
     <ng-container matColumnDef="status">
-      <th scope="col" mat-header-cell *matHeaderCellDef> status </th>
-      <td data-label="status" mat-cell *matCellDef="let element"> {{element.status}} </td>
+      <th scope="col" mat-header-cell *matHeaderCellDef> {{ 'orders.col_status' | transloco }} </th>
+      <td [attr.data-label]="'orders.col_status' | transloco" mat-cell *matCellDef="let element"> {{element.status}} </td>
     </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns" class="myhead"></tr>>
@@ -58,12 +55,7 @@
 
 </table>
 
-
         </mat-card-content>
         </mat-card>
-
-
-
-
 
 </div>

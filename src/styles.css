@@ -1,6 +1,10 @@
 @import url(assets/styles/app.css);
 @import 'primeicons/primeicons.css';
 
+html {
+  color-scheme: light;
+}
+
 :root{
     --bg-blue:linear-gradient(135deg, #0d6efd, #0a3d62);
     --bg-greem:linear-gradient(135deg, #1ef219, #19620a);
@@ -71,10 +75,37 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background: #ffffff !important;
 }
 
-.p-menubar {
-    padding: inherit !important;
-    /* background: white !important; */
+/* ── PrimeNG menubar: forzar fondo blanco globalmente ── */
+.p-menubar,
+.p-menubar-root-list,
+.p-menubar-submenu {
+    background: #ffffff !important;
+    color: #333333 !important;
+    border-color: #e0e0e0 !important;
+}
+.p-menubar-item-label {
+    color: #333333 !important;
+}
+.p-menubar-item:hover > .p-menubar-item-content,
+.p-menubar-item-content:hover {
+    background: #f5f5f5 !important;
 }
 .p-menubar-item-link {
     padding: 1% !important;
+}
+
+/* ── Scrollbar claro ── */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
 }
