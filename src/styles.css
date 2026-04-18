@@ -24,7 +24,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .pointer{cursor: pointer;}
-
+.bitlab-font{
+    font-family: 'Bitcount';
+    font-variation-settings: "wght" 300;
+}
 .mat-mdc-text-field-wrapper {
     height: 40px !important;
     align-items: center !important;
@@ -66,4 +69,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .mat-expansion-panel{
     background: #ffffff !important;
+}
+
+.p-menubar {
+    padding: inherit !important;
+    /* background: white !important; */
+}
+.p-menubar-item-link {
+    padding: 1% !important;
 }

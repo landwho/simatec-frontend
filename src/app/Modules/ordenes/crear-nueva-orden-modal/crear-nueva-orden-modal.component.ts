@@ -232,14 +232,27 @@ export class CrearNuevaOrdenModalComponent {
         return result;
     }
 
-    removeTest(testId: number, areaId: number) {
-        const control = this.areasForm
-            .get(areaId.toString())
-            ?.get(testId.toString());
+    animatingId: number | null = null;
 
-        control?.setValue(false);
+    removeTest(testId: number, areaId: number) {
+
+        this.animatingId = testId;
+
+  setTimeout(() => {
+    this._removeTestReal(testId, areaId);
+    this.animatingId = null;
+  }, 400); // duración de animación
+
+      
     }
 
+    _removeTestReal(idTest: number, idArea: number) {
+    const control = this.areasForm
+            .get(idTest.toString())
+            ?.get(idArea.toString());
+
+            control?.setValue(false);
+    }
 
     getAreaId(testId: number): number {
         for (const area of this.areas) {

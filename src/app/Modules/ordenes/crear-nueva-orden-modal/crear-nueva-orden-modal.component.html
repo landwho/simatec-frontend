@@ -177,7 +177,8 @@
                             }
                         <ul class="list-group">
                             @for (test of selectedTests; track test.idTest) {
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <li class="list-group-item d-flex justify-content-between align-items-center animate__animated animate__fadeOut"
+                                [class.animate__fadeOut]="animatingId === test.idTest">
                                     <div>
                                         <strong>{{ test.name }}</strong><br>
                                         <small class="text-muted">{{ test.area }}</small>

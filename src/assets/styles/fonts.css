@@ -6,6 +6,9 @@
     src: url(../icons/material_icons.woff2) format('woff2');
 }
 
+
+
+
 .material-icons {
     font-family: 'material-symbols-outlined';
     font-weight: normal;
@@ -19,4 +22,12 @@
     word-wrap: normal;
     direction: ltr;
     -webkit-font-smoothing: antialiased;
+}
+
+@font-face {
+  font-family: 'Bitcount';
+  font-style: normal;
+    font-weight: 100;
+    font-display: swap;
+  src: url('/assets/icons/BitcountGridDouble-VariableFont_CRSV,ELSH,ELXP,slnt,wght.ttf') format('truetype');
 }
