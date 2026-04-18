@@ -1,0 +1,62 @@
+{
+  "login": {
+    "brand": "BITLAB",
+    "tagline": "Tu plataforma de gestión",
+    "title": "Iniciar sesión",
+    "username": "Usuario",
+    "password": "Contraseña",
+    "error_user": "Por favor ingrese un usuario válido",
+    "error_password": "La contraseña es requerida",
+    "submit": "Iniciar sesión"
+  },
+  "menu": {
+    "requests": "Solicitudes",
+    "new": "Nueva",
+    "order": "Orden",
+    "quit": "Salir",
+    "breadcrumb_orders": "Órdenes",
+    "breadcrumb_list": "Listado"
+  },
+  "orders": {
+    "col_number": "No. Orden",
+    "col_date": "Fecha",
+    "col_code": "Código",
+    "col_name": "Nombre",
+    "col_lastname": "Apellido",
+    "col_gender": "Género",
+    "col_status": "Estado"
+  },
+  "new_order": {
+    "title": "Nueva Orden",
+    "patient_info": "Información del paciente",
+    "studies": "Estudios relacionados",
+    "summary": "Resumen de la orden",
+    "patient_code": "Código paciente",
+    "order_type": "Tipo de orden",
+    "first_name": "Nombres",
+    "last_name": "Apellidos",
+    "birth_date": "Fecha de nacimiento",
+    "phone": "Teléfono",
+    "email": "Correo electrónico",
+    "doctor": "Médico",
+    "origin": "Procedencia",
+    "notes": "Observaciones",
+    "gender_female": "Femenino",
+    "gender_male": "Masculino",
+    "selected_tests": "Tests seleccionados:",
+    "no_selection": "Sin selección",
+    "cancel": "Cancelar",
+    "create": "Crear",
+    "apply": "Aplicar",
+    "total": "Total:"
+  },
+  "errorCode": {
+    "CX_DENIED": "Acceso denegado. Verifique su conexión.",
+    "CX_UNAUTHORIZED": "No autorizado. Inicie sesión nuevamente.",
+    "CX_NOT_FOUND": "Recurso no encontrado.",
+    "CX_SERVER_ERROR": "Error interno del servidor.",
+    "CX_BAD_REQUEST": "Solicitud inválida.",
+    "CX_CONFLICT": "Conflicto con el estado actual del recurso.",
+    "DEFAULT": "Ocurrió un error inesperado."
+  }
+}

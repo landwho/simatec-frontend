@@ -1,0 +1,62 @@
+{
+  "login": {
+    "brand": "BITLAB",
+    "tagline": "Your management platform",
+    "title": "Sign in",
+    "username": "User Name",
+    "password": "Password",
+    "error_user": "Please enter a valid username",
+    "error_password": "Password is required",
+    "submit": "Sign in"
+  },
+  "menu": {
+    "requests": "Requests",
+    "new": "New",
+    "order": "Order",
+    "quit": "Quit",
+    "breadcrumb_orders": "Orders",
+    "breadcrumb_list": "List"
+  },
+  "orders": {
+    "col_number": "Order No.",
+    "col_date": "Date",
+    "col_code": "Code",
+    "col_name": "First Name",
+    "col_lastname": "Last Name",
+    "col_gender": "Gender",
+    "col_status": "Status"
+  },
+  "new_order": {
+    "title": "New Order",
+    "patient_info": "Patient information",
+    "studies": "Related studies",
+    "summary": "Order summary",
+    "patient_code": "Patient code",
+    "order_type": "Order type",
+    "first_name": "First name",
+    "last_name": "Last name",
+    "birth_date": "Date of birth",
+    "phone": "Phone",
+    "email": "Email",
+    "doctor": "Doctor",
+    "origin": "Origin",
+    "notes": "Observations",
+    "gender_female": "Female",
+    "gender_male": "Male",
+    "selected_tests": "Selected tests:",
+    "no_selection": "No selection",
+    "cancel": "Cancel",
+    "create": "Create",
+    "apply": "Apply",
+    "total": "Total:"
+  },
+  "errorCode": {
+    "CX_DENIED": "Access denied. Please check your connection.",
+    "CX_UNAUTHORIZED": "Unauthorized. Please sign in again.",
+    "CX_NOT_FOUND": "Resource not found.",
+    "CX_SERVER_ERROR": "Internal server error.",
+    "CX_BAD_REQUEST": "Invalid request.",
+    "CX_CONFLICT": "Conflict with the current state of the resource.",
+    "DEFAULT": "An unexpected error occurred."
+  }
+}
