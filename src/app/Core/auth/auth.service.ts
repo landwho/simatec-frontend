@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { ApiService } from './api.service';
 import { environment } from './../../../environments/environment';
 import { LoggedUser, LoginModel } from '../models/loginModel.model';
@@ -23,6 +23,7 @@ export class AuthService {
   sockets$ = this._sockets$.asObservable();
 
   private readonly TOKEN_NAME = environment.AUTH_KEY;
+  private readonly REFRESH_TOKEN_NAME = 'refreshToken';
   private userLogged?: UserModel;
 
   constructor(
@@ -39,6 +40,9 @@ export class AuthService {
   }
   get token() {
     return localStorage.getItem(this.TOKEN_NAME);
+  }
+  get refreshToken(): string {
+    return localStorage.getItem(this.REFRESH_TOKEN_NAME) ?? '';
   }
 
   set currentUserName(user: string) {
@@ -64,25 +68,33 @@ export class AuthService {
 
   signIn(user: any) {
     return this.ApiService.postMethod<LoginModel>('/api/auth/login', user, { loaderType: 'loader' }).pipe(
-      tap((response:any) => {
-        // this.currentUserName = JSON.stringify(response.result.usuario);
-         localStorage.setItem(this.TOKEN_NAME, response.accessToken);
-        // localStorage.setItem('parametrizations', JSON.stringify(response.parametrizations));
+      tap((response: any) => {
+        localStorage.setItem(this.TOKEN_NAME, response.accessToken);
+        if (response.refreshToken) {
+          localStorage.setItem(this.REFRESH_TOKEN_NAME, response.refreshToken);
+        }
         this._isLoggedIn$.next(true);
       }),
     );
   }
 
-  
-  
+  refreshAccessToken(): Observable<{ accessToken: string }> {
+    return this.ApiService.postMethod<{ accessToken: string }>(
+      '/api/auth/refresh',
+      { refreshToken: this.refreshToken },
+      { loaderType: 'none', silent: true }
+    ).pipe(
+      tap((response: any) => {
+        localStorage.setItem(this.TOKEN_NAME, response.accessToken);
+      })
+    );
+  }
+
   signOut() {
-    // Remove token from the local storage
-   
     this.dialog.closeAll();
     localStorage.clear();
     this._isLoggedIn$.next(false);
     this.Router.navigate(['/simatec/login']);
-    return this.ApiService.postMethod('/api/auth/logout',{}, { loaderType: 'loader' });
-    
+    return this.ApiService.postMethod('/api/auth/logout', {}, { loaderType: 'loader' });
   }
 }
