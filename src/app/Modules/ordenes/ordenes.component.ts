@@ -6,6 +6,7 @@ import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { DatePipe } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-ordenes',
@@ -15,7 +16,8 @@ import { MatCardModule } from '@angular/material/card';
   imports:[
     DatePipe, MatTableModule,
     MatPaginatorModule, MatCardModule,
-    MatIconModule
+    MatIconModule,
+    TranslocoModule,
 ]
 })
 export class OrdenesComponent implements AfterViewInit{

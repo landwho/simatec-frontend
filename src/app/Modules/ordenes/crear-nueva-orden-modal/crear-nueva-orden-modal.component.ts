@@ -21,6 +21,7 @@ import { CommonModule } from '@angular/common';
 import {MatListModule} from '@angular/material/list';
 import { OrderListInterface } from '../model/order-list.interface';
 import { Validators } from '@angular/forms';
+import { TranslocoModule } from '@jsverse/transloco';
 
 import { OrdenesService } from '../ordenes.service';
 
@@ -37,7 +38,8 @@ import { OrdenesService } from '../ordenes.service';
         MatDatepickerModule, MatRadioModule,
         MatExpansionModule, MatCheckboxModule,
         ReactiveFormsModule, CommonModule,
-        MatListModule 
+        MatListModule,
+        TranslocoModule,
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -55,9 +57,6 @@ export class CrearNuevaOrdenModalComponent {
     form!: FormGroup
     areasForm: FormGroup = this.FormBuilder.group({});
 
-    patientCardText:string = "Informacion del paciente";
-    areaCardText:string = "Estudios relacionados";
-    resumenCardText:string = "resumen de la orden"
     physicians: PhysicianInterfaceModel[]= []
     areas:AreaCatalogInterfaceModel[] =[];
     origin:OriginInterfaceModel[] = [];

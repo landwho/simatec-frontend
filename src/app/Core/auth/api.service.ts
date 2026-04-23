@@ -7,11 +7,12 @@ import { throwError } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { LoaderService } from '../loader/loader.service';
-import { TranslateService } from '../services/translate.service';
+import { TranslocoService } from '@jsverse/transloco';
 type ApiLoaderType = 'loader' | 'dna' | 'skeleton' | 'none';
 type ApiMoreOptions = {
   params?: any,
-  loaderType?: ApiLoaderType
+  loaderType?: ApiLoaderType,
+  silent?: boolean
 };
 
 @Injectable({
@@ -24,7 +25,7 @@ export class ApiService {
     private MatSnackBar: MatSnackBar,
     private Router: Router,
     private LoaderService: LoaderService,
-    private TranslateService:TranslateService
+    private translocoService: TranslocoService
   ) {}
 
   showLoader(loaderType: ApiLoaderType = "loader") {
@@ -49,27 +50,28 @@ export class ApiService {
       }),
       catchError((error: HttpErrorResponse) => {
         this.hideLoader(loaderType);
-        if (error.status == 0) this.showErrorMessage(this.TranslateService.instant_child('errorCode','CX_DENIED'));
+        if (error.status == 0) this.showErrorMessage(this.translocoService.translate('errorCode.CX_DENIED'));
         if (!error.ok) this.showErrorMessage(error.error.errors?.msg);
-        this.showErrorMessage(this.TranslateService.instant_child('errorCode',error.error.errorCode));
+        this.showErrorMessage(this.translocoService.translate(`errorCode.${error.error.errorCode ?? 'DEFAULT'}`));
         return throwError(()=>true);
       }),
     );
   }
 
-  postMethod<T>(endpoint: string, data: any, { params, loaderType }: ApiMoreOptions = {}) {
+  postMethod<T>(endpoint: string, data: any, { params, loaderType, silent }: ApiMoreOptions = {}) {
     const url = `${environment.URLBase}${endpoint}`;
     this.showLoader(loaderType);
-    this.LoaderService.showSpiner();
+    if (loaderType !== 'none') this.LoaderService.showSpiner();
     return this.HttpClient.post<T>(url, data, { params, withCredentials:true }).pipe(
       tap(() => {
         this.hideLoader(loaderType);
       }),
       catchError((error: HttpErrorResponse) => {
         this.hideLoader(loaderType);
-        // if (error.status == 0) this.showErrorMessage(this.TranslateService.instant_child('errorCode','CX_DENIED'));
-        if (error.status == 0) this.showErrorMessage("ERR_CONNECTION_REFUSED");
-        this.showErrorMessage(error.error.message);
+        if (!silent) {
+          if (error.status == 0) this.showErrorMessage("ERR_CONNECTION_REFUSED");
+          this.showErrorMessage(error.error.message);
+        }
         return throwError(() => error);
       }),
     );
@@ -86,10 +88,10 @@ export class ApiService {
         this.hideLoader(loaderType);
 
         if (error.status == 0) {
-          this.showErrorMessage(this.TranslateService.instant_child('errorCode','CX_DENIED'));
+          this.showErrorMessage(this.translocoService.translate('errorCode.CX_DENIED'));
         }
 
-        this.showErrorMessage(this.TranslateService.instant_child('errorCode',error.error.errorCode));
+        this.showErrorMessage(this.translocoService.translate(`errorCode.${error.error.errorCode ?? 'DEFAULT'}`));
         return throwError(()=> true);
       }),
     );

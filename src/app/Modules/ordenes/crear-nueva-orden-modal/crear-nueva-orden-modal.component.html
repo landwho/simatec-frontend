@@ -1,26 +1,26 @@
-<h2 mat-dialog-title>Nueva Orden</h2>
+<h2 mat-dialog-title>{{ 'new_order.title' | transloco }}</h2>
 <mat-dialog-content class="mat-typography">
     <form [formGroup]="form">
         <div class="row">
             <div class="col-md-9">
                 <mat-card class="example-card" appearance="outlined">
                     <mat-card-header>
-                        <h6>{{patientCardText}}</h6>
+                        <h6>{{ 'new_order.patient_info' | transloco }}</h6>
                     </mat-card-header>
                     <mat-card-content>
-                    
+
                         <div class="row">
                             <div class="col-md-6">
                                 <mat-form-field class="w-100" appearance="outline">
-                                    <mat-label>Codigo paciente</mat-label>
-                                    <input matInput placeholder="Placeholder" formControlName="patientCode">
+                                    <mat-label>{{ 'new_order.patient_code' | transloco }}</mat-label>
+                                    <input matInput formControlName="patientCode">
                                      <mat-icon matSuffix>barcode</mat-icon>
                                 </mat-form-field>
                             </div>
-                    
+
                             <div class="col-md-6">
                                  <mat-form-field class="w-100" appearance="outline">
-                                    <mat-label>Tipo de orden</mat-label>
+                                    <mat-label>{{ 'new_order.order_type' | transloco }}</mat-label>
                                     <mat-select formControlName="idOrderType">
                                         @for(o of orderType; track o.idOrderType){
                                              <mat-option [value]="o.idOrderType">{{o.description}}</mat-option>
@@ -33,14 +33,14 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <mat-form-field class="w-100" appearance="outline">
-                                    <mat-label>Nombres</mat-label>
-                                    <input matInput placeholder="Placeholder" formControlName="firstName">
+                                    <mat-label>{{ 'new_order.first_name' | transloco }}</mat-label>
+                                    <input matInput formControlName="firstName">
                                 </mat-form-field>
                             </div>
                             <div class="col-md-6">
                                 <mat-form-field class="w-100" appearance="outline">
-                                    <mat-label>Apellidos</mat-label>
-                                    <input matInput placeholder="Placeholder" formControlName="lastName">
+                                    <mat-label>{{ 'new_order.last_name' | transloco }}</mat-label>
+                                    <input matInput formControlName="lastName">
                                 </mat-form-field>
                             </div>
                         </div>
@@ -48,22 +48,22 @@
                             <div class="col-md-6">
                                 <div class="mb-3">
                                 <mat-form-field class="w-100" appearance="outline">
-                                    <mat-label>Choose a date</mat-label>
+                                    <mat-label>{{ 'new_order.birth_date' | transloco }}</mat-label>
                                     <input matInput [matDatepicker]="datepicker" formControlName="birth"/>
                                     <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
                                     <mat-datepicker #datepicker>
                                         <mat-datepicker-actions>
-                                        <button mat-button matDatepickerCancel>Cancel</button>
-                                        <button mat-raised-button matDatepickerApply>Apply</button>
+                                        <button mat-button matDatepickerCancel>{{ 'new_order.cancel' | transloco }}</button>
+                                        <button mat-raised-button matDatepickerApply>{{ 'new_order.apply' | transloco }}</button>
                                         </mat-datepicker-actions>
                                     </mat-datepicker>
                                 </mat-form-field>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <mat-radio-group aria-label="Genero" formControlName="gender">
-                                <mat-radio-button value="F">Femenino</mat-radio-button>
-                                <mat-radio-button value="M">Maculino</mat-radio-button>
+                                <mat-radio-group [attr.aria-label]="'orders.col_gender' | transloco" formControlName="gender">
+                                <mat-radio-button value="F">{{ 'new_order.gender_female' | transloco }}</mat-radio-button>
+                                <mat-radio-button value="M">{{ 'new_order.gender_male' | transloco }}</mat-radio-button>
                                 </mat-radio-group>
                             </div>
                         </div>
@@ -71,14 +71,14 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <mat-form-field class="w-100" appearance="outline">
-                                    <mat-label>Telefono</mat-label>
-                                    <input matInput type="text" placeholder="Placeholder" formControlName="phone">
+                                    <mat-label>{{ 'new_order.phone' | transloco }}</mat-label>
+                                    <input matInput type="text" formControlName="phone">
                                 </mat-form-field>
                             </div>
                             <div class="col-md-6">
                                 <mat-form-field class="w-100" appearance="outline">
-                                    <mat-label>Email</mat-label>
-                                    <input matInput type="email" placeholder="Placeholder" formControlName="email">
+                                    <mat-label>{{ 'new_order.email' | transloco }}</mat-label>
+                                    <input matInput type="email" formControlName="email">
                                 </mat-form-field>
                             </div>
                         </div>
@@ -86,20 +86,20 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <mat-form-field class="w-100" appearance="outline">
-                                    <mat-label>Medico</mat-label>
+                                    <mat-label>{{ 'new_order.doctor' | transloco }}</mat-label>
                                     <mat-select formControlName="idDoctor">
                                         @for (doc of physicians; track doc.iddoctor) {
                                             <mat-option [value]="doc.iddoctor">
                                                 {{ doc.firstname }} {{ doc.lastname }}
                                             </mat-option>
-                                            }
+                                        }
                                     </mat-select>
                                 </mat-form-field>
                             </div>
 
                             <div class="col-md-6">
                                 <mat-form-field class="w-100" appearance="outline">
-                                    <mat-label>Procedencia</mat-label>
+                                    <mat-label>{{ 'new_order.origin' | transloco }}</mat-label>
                                     <mat-select formControlName="idOrigin">
                                         @for(o of origin; track o.idorigin){
                                              <mat-option [value]="o.idorigin">{{o.description}}</mat-option>
@@ -112,18 +112,18 @@
                             <div class="col-md-">
                                 <div class="mb-3">
                                     <mat-form-field class="w-100" appearance="outline">
-                                        <mat-label>Observaciones</mat-label>
-                                        <input matInput placeholder="Placeholder" formControlName="notes">
+                                        <mat-label>{{ 'new_order.notes' | transloco }}</mat-label>
+                                        <input matInput formControlName="notes">
                                     </mat-form-field>
                                 </div>
                             </div>
-                        </div>  
+                        </div>
                     </mat-card-content>
                 </mat-card>
 
                  <mat-card class="example-card mt-2" appearance="outlined">
                     <mat-card-header>
-                        <h6>{{areaCardText}}</h6>
+                        <h6>{{ 'new_order.studies' | transloco }}</h6>
                     </mat-card-header>
                     <mat-card-content>
                         <div class="row">
@@ -141,7 +141,7 @@
                                                 @for (test of area.tests; track test.idTest) {
                                                     <div class="list-group-item d-flex justify-content-between align-items-center">
                                                         <label class="d-flex align-items-center mb-0 w-100 pointer">
-                                                            <input 
+                                                            <input
                                                             class="form-check-input me-2"
                                                             type="checkbox"
                                                             [formControlName]="test.idTest.toString()">
@@ -162,18 +162,18 @@
                         }
                     </div>
                     </mat-card-content>
-                </mat-card>              
+                </mat-card>
             </div>
 
             <div class="col-md-3">
                 <mat-card class="example-card h-100 d-flex flex-column" appearance="outlined">
                     <mat-card-header>
-                        <h6>{{resumenCardText}}</h6>
+                        <h6>{{ 'new_order.summary' | transloco }}</h6>
                     </mat-card-header>
                         <mat-card-content class="flex-grow-1">
-                        <p><strong>Tests seleccionados:</strong></p>
+                        <p><strong>{{ 'new_order.selected_tests' | transloco }}</strong></p>
                             @if (selectedTests.length === 0) {
-                                <p class="text-muted">Sin selección</p>
+                                <p class="text-muted">{{ 'new_order.no_selection' | transloco }}</p>
                             }
                         <ul class="list-group">
                             @for (test of selectedTests; track test.idTest) {
@@ -187,7 +187,7 @@
                                         <span class="badge bg-primary">Q {{ test.price }}</span>
                                         <span class="pointer red"
                                                 (click)="removeTest(test.idTest, getAreaId(test.idTest))">
-                                        ✕ 
+                                        ✕
                                         </span>
                                     </div>
                                 </li>
@@ -196,7 +196,7 @@
                     </mat-card-content>
                     <mat-card-footer>
                         <mat-card-actions class="d-flex justify-content-between align-items-center">
-                            <strong>Total:</strong>
+                            <strong>{{ 'new_order.total' | transloco }}</strong>
                             <span class="badge bg-success fs-sm">
                             Q {{ totalPrice }}
                             </span>
@@ -205,11 +205,11 @@
                 </mat-card>
             </div>
         </div>
- 
+
     </form>
 
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="crearOrden()" [disabled]="form.invalid">Crear</button>
+  <button mat-button mat-dialog-close>{{ 'new_order.cancel' | transloco }}</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="crearOrden()" [disabled]="form.invalid">{{ 'new_order.create' | transloco }}</button>
 </mat-dialog-actions>

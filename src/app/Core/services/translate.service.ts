@@ -1,41 +1,32 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Subject } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { TranslocoService } from '@jsverse/transloco';
+import { Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class TranslateService {
-  private dataSubject:Subject<boolean> = new Subject<boolean>();
-  data: any = {};
+  private transloco = inject(TranslocoService);
 
-  constructor(private http: HttpClient) {}
-
-  use(lang: string): Promise<{}> {
-    return new Promise<{}>(resolve => {
-      const langPath: string = `assets/i18n/${lang || 'es'}.json`;
-      this.http.get(langPath).subscribe({
-        next: (res:Object) => {
-          this.data = res || {};
-          this.dataSubject.next(true);
-          resolve(this.data);
-        },
-        error: ():void => {
-          this.data = {};
-          resolve(this.data);
-        },
-      });
-    });
+  translate(key: string, params?: Record<string, unknown>): string {
+    return this.transloco.translate(key, params);
   }
 
-  changeLanguage(){
-    return this.dataSubject.asObservable();
+  selectTranslate(key: string, params?: Record<string, unknown>): Observable<string> {
+    return this.transloco.selectTranslate(key, params);
   }
 
-  instant(key: string) {
-    return this.data[key] || key;
+  selectTranslateObject(key: string): Observable<Record<string, string>> {
+    return this.transloco.selectTranslateObject(key);
   }
-  instant_child(key: string,child: string) {
-    return this.data[key][child] || key;
+
+  setLanguage(lang: 'es' | 'en'): void {
+    this.transloco.setActiveLang(lang);
+  }
+
+  getActiveLang(): string {
+    return this.transloco.getActiveLang();
+  }
+
+  get langChanges$(): Observable<string> {
+    return this.transloco.langChanges$;
   }
 }
